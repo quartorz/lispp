@@ -25,8 +25,8 @@ int main()
 				int_<5>>>>::value
 		<< std::endl;
 	// (cond
-	//     ((> 60 10) (+ 100 200))
-	//     ((> 30 20) (+ 1 2))
+	//     ((< 60 10) (+ 100 200))
+	//     ((< 30 20) (+ 1 2))
 	//     (t '5))
 
 	print_t<mapcar_t<add, list<int_<1>, int_<2>, int_<3>, int_<5>>, list<int_<5>, int_<7>, int_<10>>>>();
