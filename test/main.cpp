@@ -13,7 +13,7 @@ int main()
 	std::cout << length<l>::value << std::endl;
 
 	std::cout
-		<< cond_t<list<
+		<< cond_t<
 			list<
 				apply_t<lt, list<int_<60>, int_<10>>>,
 				apply_t<add, cons_t<int_<100>, list<int_<100>, int_<200>>>>>,
@@ -22,7 +22,7 @@ int main()
 				add<int_<1>, int_<2>>>,
 			list<
 				t,
-				int_<5>>>>::value
+				int_<5>>>::value
 		<< std::endl;
 	// (cond
 	//     ((< 60 10) (+ 100 200))
