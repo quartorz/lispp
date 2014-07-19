@@ -13,4 +13,7 @@ namespace lispp{
 		static constexpr int value = Arg::type::value * mul<Args...>::value;
 		using type = int_<value>;
 	};
+
+	template <class... Args>
+	using mul_t = typename mul<Args...>::type;
 }

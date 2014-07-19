@@ -1,13 +1,19 @@
 #pragma once
 
+#include <ostream>
+
 namespace lispp{
 	template <class... Args>
 	struct list{
 		using type = list<Args...>;
+		void print(std::ostream &os) const;
 	};
 	template <>
 	struct list<>{
 		using type = list<>;
+		void print(std::ostream &os) const
+		{
+		}
 	};
 
 	using nil = list<>;
@@ -56,4 +62,27 @@ namespace lispp{
 
 	template <class T>
 	using cdr_t = typename cdr<T>::type;
+
+
+	template <class... Args>
+	inline void list<Args...>::print(std::ostream &os) const
+	{
+		os << car_t<type>();
+		cdr_t<type>().print(os);
+	}
+
+	std::ostream &operator<<(std::ostream &os, const list<> &)
+	{
+		os << "()";
+		return os;
+	}
+
+	template <class... Args>
+	inline std::ostream &operator<<(std::ostream &os, const list<Args...> &l)
+	{
+		os << "( ";
+		l.print(os);
+		os << ") ";
+		return os;
+	}
 }

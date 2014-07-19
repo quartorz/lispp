@@ -13,4 +13,7 @@ namespace lispp{
 		static constexpr int value = Arg::type::value + add<Args...>::value;
 		using type = int_<value>;
 	};
+
+	template <class... Args>
+	using add_t = typename add<Args...>::type;
 }

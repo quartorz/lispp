@@ -13,4 +13,7 @@ namespace lispp{
 		static constexpr int value = Arg::type::value / div<Args...>::value;
 		using type = int_<value>;
 	};
+
+	template <class... Args>
+	using div_t = typename div<Args...>::type;
 }

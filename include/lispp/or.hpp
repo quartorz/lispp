@@ -16,6 +16,10 @@ namespace lispp{
 	}
 
 	template <class... Args>
-	struct or_ : int_<aux_::or_impl(Args::type::value...)>{
+	struct or_{
+		using type = int_<aux_::or_impl(Args::type::value...)>;
 	};
+
+	template <class... Args>
+	using or_t = typename or_<Args...>::type;
 }

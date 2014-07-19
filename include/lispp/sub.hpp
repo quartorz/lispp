@@ -13,4 +13,7 @@ namespace lispp{
 		static constexpr int value = Arg::type::value - sub<Args...>::value;
 		using type = int_<value>;
 	};
+
+	template <class... Args>
+	using sub_t = typename sub<Args...>::type;
 }

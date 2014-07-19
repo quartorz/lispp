@@ -13,4 +13,7 @@ namespace lispp{
 		static constexpr int value = Arg::type::value % mod<Args...>::value;
 		using type = int_<value>;
 	};
+
+	template <class... Args>
+	using mod_t = typename mod<Args...>::type;
 }

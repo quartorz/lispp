@@ -24,10 +24,10 @@ namespace lispp{
 		};
 	}
 
-	template <class>
-	struct c_or{
-	};
 	template <class... Args>
-	struct c_or<list<Args...>> : aux_::c_or_impl<list<Args...>, typename car_t<list<Args...>>::type>{
+	struct c_or : aux_::c_or_impl<list<Args...>, typename car_t<list<Args...>>::type>{
 	};
+
+	template <class... Args>
+	using c_or_t = typename c_or<Args...>::type;
 }
