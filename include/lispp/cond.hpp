@@ -1,28 +1,28 @@
 #pragma once
 
-#include "list.hpp"
+#include "base_types.hpp"
+#include "basic.hpp"
 
 namespace lispp{
-	template <bool, class>
-	struct cond_impl{
+	class cond{
+		template <bool, class...>
+		class ii;
+		template <class First, class... Rest>
+		class ii<true, First, Rest...>{
+		public:
+			template <class...>
+			using type = typename car::type<cdr::type<typename First::template type<>>>::template type<>;
+		};
+		template <class First, class Second, class... Rest>
+		class ii<false, First, Second, Rest...> : public ii<!null::type<car::type<typename Second::template type<>>>::value, Second, Rest...>{
+		};
+		template <class First, class... Rest>
+		class i : public ii<!null::type<car::type<typename First::template type<>>>::value, First, Rest...>{
+		};
+	public:
+		template <class... Args>
+		using type = i<Args...>;
 	};
-	template <class Head, class... Rest>
-	struct cond_impl<true, list<Head, Rest...>>{
-		using type = car_t<cdr_t<Head>>;
-	};
-
-	template <class Head, class... Rest>
-	struct cond_impl<false, list<Head, Rest...>>
-		: cond_impl<
-			!null<typename car_t<car_t<list<Rest...>>>::type>::value
-			, list<Rest...>>
-	{
-	};
-
 	template <class... Args>
-	struct cond : cond_impl<!null<typename car_t<car_t<list<Args...>>>::type>::value, list<Args...>>{
-	};
-
-	template <class... Args>
-	using cond_t = typename cond<Args...>::type;
+	using cond_t = cond::type<Args...>;
 }

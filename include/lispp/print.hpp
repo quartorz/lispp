@@ -2,11 +2,10 @@
 
 namespace lispp{
 	template <class T>
-	struct print{
-		using type = T;
+	class print{
 		char : 16;
+	public:
+		template <class...>
+		using type = T;
 	};
-
-	template <class T>
-	using print_t = typename print<T>::type;
 }
